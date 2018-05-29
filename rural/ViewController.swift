@@ -37,11 +37,11 @@ class ViewController: UIViewController, DataHolderDelegate {
     }
     func DHDlogin(blFinLogin: Bool) {
         alert5.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        alert7.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert7.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.performSegue(withIdentifier: "transicionlogin", sender: nil)
+        }))
         if blFinLogin {
-            
-            
-            self.performSegue(withIdentifier: "transicionlogin", sender: self)
+    
             self.present(self.alert7, animated: true)
         }
         else
