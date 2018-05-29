@@ -102,12 +102,13 @@ class DataHolder: NSObject {
                     delegate.DHDlogin!(blFinLogin: true)
                 } else {
                     print("Document does not exist")
+                    delegate.DHDlogin!(blFinLogin: false)
                 }
             }
             print("Te Logeaste !")
         }else
         {
-            
+            delegate.DHDlogin!(blFinLogin: false)
             //present(alert5, animated: true)
             print("error!")
             
