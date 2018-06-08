@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IYn-2y-hmb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -140,6 +140,12 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="0bW-Uy-mju">
+                                        <rect key="frame" x="164" y="450" width="39" height="37"/>
+                                    </pageControl>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOa-AT-0Lr">
+                                        <rect key="frame" x="18" y="63" width="331" height="406"/>
+                                    </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vvm-1i-VTD">
                                         <rect key="frame" x="-115" y="-20" width="114" height="677"/>
                                         <subviews>
@@ -283,12 +289,6 @@
                                             <constraint firstItem="i5T-gD-Xnt" firstAttribute="trailing" secondItem="Vvm-1i-VTD" secondAttribute="trailingMargin" id="uRG-wl-zJY"/>
                                         </constraints>
                                     </view>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOa-AT-0Lr">
-                                        <rect key="frame" x="18" y="63" width="331" height="406"/>
-                                    </scrollView>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="0bW-Uy-mju">
-                                        <rect key="frame" x="164" y="450" width="39" height="37"/>
-                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1109,7 +1109,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="85m-ir-jzW"/>
         <segue reference="fYs-Ic-TaZ"/>
-        <segue reference="06w-Y9-yS8"/>
+        <segue reference="Lnn-KX-kaN"/>
         <segue reference="poW-as-VBG"/>
     </inferredMetricsTieBreakers>
 </document>
