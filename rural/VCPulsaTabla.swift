@@ -13,8 +13,26 @@ class VCPulsaTabla: UIViewController {
     @IBOutlet var btnVolver:UIButton?
     @IBOutlet var lblTitle:UILabel?
     @IBOutlet var lblProvincia:UILabel?
+    @IBOutlet var rightBarButton: UIButton!
+        
+    @IBAction func buttonTapped(sender : UIButton!) {
+        
+        
+        if( sender.isSelected==true)
+        {
+            sender.isSelected=false;
+            
+        } else
+        {
+            sender.isSelected=true;
+            DataHolder.sharedInstance.varFav=DataHolder.sharedInstance.varFav+1;
+            print(DataHolder.sharedInstance.varFav)
+            
+        }
+    }
     
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("EL INDICE DEL ELEMENTO SELCCIONADO ES!!!! :",DataHolder.sharedInstance.indicePueblo)

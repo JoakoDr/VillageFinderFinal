@@ -59,10 +59,11 @@ UIViewController,UITableViewDelegate,UITableViewDataSource,DataHolderDelegate,UI
         let celda = tableView.dequeueReusableCell(withIdentifier: "idCelda") as! celdaPrototiopo
         celda.lblNombre?.text = self.arPerfilesFiltro[indexPath.row].sNombre
         celda.Label?.text = self.arPerfilesFiltro[indexPath.row].sProvincia
-        if(self.arPerfilesFiltro[indexPath.row].sImagen! != nil)
-        {
+        //if(self.arPerfilesFiltro[indexPath.row].sImagen! != nil)
+        //{
+        print(self.arPerfilesFiltro[indexPath.row].sNombre,"     ",self.arPerfilesFiltro[indexPath.row].sImagen)
         celda.mostrarImagen(url:  self.arPerfilesFiltro[indexPath.row].sImagen!)
-        }
+        //}
         return celda
     }
     

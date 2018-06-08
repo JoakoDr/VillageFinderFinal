@@ -42,7 +42,7 @@ class VCSelectImg: UIViewController, UIImagePickerControllerDelegate, UINavigati
         self.imgSub?.layer.cornerRadius = (self.imgSub?.frame.size.width)! / 2
         self.imgSub?.clipsToBounds = true
         self.imgSub?.layer.borderWidth = 1.0
-        self.imgSub?.layer.borderColor = UIColor.blue.cgColor
+        self.imgSub?.layer.borderColor = UIColor.white.cgColor
         
         
     }

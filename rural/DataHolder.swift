@@ -27,6 +27,7 @@ class DataHolder: NSObject {
     var hmImagenes:[String:UIImage] = [:]
     var firUser:User?
     var indicePueblo:Int = 0;
+    var varFav:Int = 0;
     
     
     func initFirebase() {

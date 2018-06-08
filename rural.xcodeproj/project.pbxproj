@@ -142,6 +142,7 @@
 				9A4A3A642063B79600C2F232 /* Frameworks */,
 				9A4A3A652063B79600C2F232 /* Resources */,
 				11C6961B73204192A1B6C2B0 /* [CP] Embed Pods Frameworks */,
+				3721029BA75799BA5787B57E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -240,6 +241,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rural/Pods-rural-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3721029BA75799BA5787B57E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rural/Pods-rural-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6720BBF624645A5E599E5B4A /* [CP] Check Pods Manifest.lock */ = {
