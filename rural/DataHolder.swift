@@ -27,7 +27,7 @@ class DataHolder: NSObject {
     var hmImagenes:[String:UIImage] = [:]
     var firUser:User?
     var indicePueblo:Int = 0;
-    var varFav:Int = 0;
+    var varFav:Bool = false;
     
     
     func initFirebase() {
@@ -62,10 +62,14 @@ class DataHolder: NSObject {
         }
         
     }
-    func registrarse(user: String, password:String, delegate: DataHolderDelegate){
+    func registrarse(user: String, password:String, password2:String,Nombre:String , delegate: DataHolderDelegate){
         var blFinRegistro:Bool = false
-                Auth.auth().createUser(withEmail:user, password:password){ (user, error) in
-                    if (user != nil) {
+        
+        if (user != nil || password != nil || password2 != nil || password != password2) {
+        Auth.auth().createUser(withEmail:user, password:password){ (user, error) in
+            if (error == nil) {
+            if (user != nil && password != nil) {
+                
                         self.firUser = user
                         print("Te Registraste !")
                         self.savePerfil()
@@ -77,7 +81,8 @@ class DataHolder: NSObject {
                         
                     }
                 }
-    
+        }
+        }
     }
 
     func savePerfil() {
@@ -93,6 +98,7 @@ class DataHolder: NSObject {
         Auth.auth().signIn(withEmail: (user), password: (password)) { (user, error) in
             
         if (error == nil) {
+            if(user != nil && password != nil){
             self.firUser = user
             let refperfiles = DataHolder.sharedInstance.firestoreDB?.collection("perfiles").document((user?.uid)!)
             refperfiles?.getDocument { (document, error) in
@@ -107,6 +113,7 @@ class DataHolder: NSObject {
                 }
             }
             print("Te Logeaste !")
+                }
         }else
         {
             delegate.DHDlogin!(blFinLogin: false)

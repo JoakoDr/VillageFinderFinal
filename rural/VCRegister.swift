@@ -18,13 +18,15 @@ class VCRegister: UIViewController, DataHolderDelegate{
     @IBOutlet var btnRegistro:UIButton?
     @IBOutlet var btnVolver:UIButton?
     @IBOutlet var testPassword:UILabel?
+    var pass:String = ""
+    var pass2:String = ""
    
     
     @IBAction func eventoClickLogin()  {
         
        DataHolder.sharedInstance.miPerfil.sEmail=txtEmail?.text
         DataHolder.sharedInstance.miPerfil.sNombre=txtUser?.text
-        DataHolder.sharedInstance.registrarse(user: (txtEmail?.text)!, password: (txtPassword?.text)!, delegate: self)
+        DataHolder.sharedInstance.registrarse(user: (txtEmail?.text)!, password: (txtPassword?.text)!,password2: pass2,Nombre: DataHolder.sharedInstance.miPerfil.sNombre! , delegate: self)
         
     }
     
@@ -35,6 +37,10 @@ class VCRegister: UIViewController, DataHolderDelegate{
     func DHDregistro(blFinRegistro: Bool) {
         if blFinRegistro {
              self.performSegue(withIdentifier: "transicionregistro", sender: self)
+        }
+        else
+        {
+            
         }
         
     }

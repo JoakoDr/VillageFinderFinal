@@ -20,13 +20,16 @@ class VCPulsaTabla: UIViewController {
         
         if( sender.isSelected==true)
         {
+            
             sender.isSelected=false;
             
         } else
         {
             sender.isSelected=true;
-            DataHolder.sharedInstance.varFav=DataHolder.sharedInstance.varFav+1;
+            if (sender.isSelected){
+            DataHolder.sharedInstance.varFav=true;
             print(DataHolder.sharedInstance.varFav)
+            }
             
         }
     }
