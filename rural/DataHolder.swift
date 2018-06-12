@@ -64,12 +64,11 @@ class DataHolder: NSObject {
     }
     func registrarse(user: String, password:String, password2:String,Nombre:String , delegate: DataHolderDelegate){
         var blFinRegistro:Bool = false
-        
-        if (user != nil || password != nil || password2 != nil || password != password2) {
-        Auth.auth().createUser(withEmail:user, password:password){ (user, error) in
-            if (error == nil) {
-            if (user != nil && password != nil) {
-                
+        print(user)
+        print(Nombre)
+        if ( !user.isEmpty && !password.isEmpty && !password2.isEmpty && !password.isEmpty)  {
+            Auth.auth().createUser(withEmail:user, password:password){ (user, error) in
+                    if (error == nil) {
                         self.firUser = user
                         print("Te Registraste !")
                         self.savePerfil()
@@ -80,9 +79,12 @@ class DataHolder: NSObject {
                         print(error!)
                         
                     }
-                }
+            }
+        } else
+        {
+            
         }
-        }
+        
     }
 
     func savePerfil() {
