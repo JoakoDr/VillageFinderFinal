@@ -11,18 +11,13 @@ import Firebase
 import FirebaseDatabase
 
 class DataHolder: NSObject {
+    //objeto dataholder para compartir la informacion desde todas las demas clases
     static let sharedInstance:DataHolder = DataHolder()
-    
-    var numeroCeldas:UInt=6;
     var firDataBasRef: DatabaseReference!
-    //var arpueblos
-    
-    
     var firestoreDB:Firestore?
     var firStorage:Storage?
     var firStorageRef:StorageReference?
     var arCiudades:[Perfil] = []
-    //var arPueblos:[pueblos] = [] 
     var miPerfil:Perfil = Perfil ()
     var hmImagenes:[String:UIImage] = [:]
     var firUser:User?
@@ -37,7 +32,7 @@ class DataHolder: NSObject {
         firStorageRef = firStorage?.reference()
         
     }
-    
+    // metodo que descarga todos los datos del perfil y los mete en arrciudads.
     func descargarColeccion(delegate:DataHolderDelegate) {
 
         var blFin:Bool = false
@@ -62,11 +57,10 @@ class DataHolder: NSObject {
         }
         
     }
-    func registrarse(user: String, password:String, password2:String,Nombre:String , delegate: DataHolderDelegate){
-        var blFinRegistro:Bool = false
-        print(user)
-        print(Nombre)
-        if ( !user.isEmpty && !password.isEmpty && !password2.isEmpty && !password.isEmpty)  {
+    // metodo que sirve para registrarse 
+    func registrarse(user: String, password:String ,delegate: DataHolderDelegate){
+       // var blFinRegistro:Bool = false
+       
             Auth.auth().createUser(withEmail:user, password:password){ (user, error) in
                     if (error == nil) {
                         self.firUser = user
@@ -79,14 +73,11 @@ class DataHolder: NSObject {
                         print(error!)
                         
                     }
-            }
-        } else
-        {
             
         }
         
     }
-
+    // guardamos los datos del objeto perfil en forma de hashmap en la coleccion perfiles.
     func savePerfil() {
         self.firestoreDB?.collection("perfiles").document((firUser?.uid)!).setData(self.miPerfil.getMap()) { err in
             if let err = err {
@@ -96,10 +87,12 @@ class DataHolder: NSObject {
             }
         }
     }
+    // metodo de login
     func login(user: String, password: String, delegate: DataHolderDelegate){
         Auth.auth().signIn(withEmail: (user), password: (password)) { (user, error) in
             
         if (error == nil) {
+            
             if(user != nil && password != nil){
             self.firUser = user
             let refperfiles = DataHolder.sharedInstance.firestoreDB?.collection("perfiles").document((user?.uid)!)
@@ -126,7 +119,7 @@ class DataHolder: NSObject {
         }
     }
 }
-
+// creamos la interfaz dhd con los siguientes metodos.
 @objc protocol DataHolderDelegate{
     
     @objc optional func DHDdescargaCiudades(blFin:Bool)

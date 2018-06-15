@@ -15,11 +15,14 @@ import CoreLocation
 class VCSelectImg: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,MKMapViewDelegate, CLLocationManagerDelegate,DataHolderDelegate,UIGestureRecognizerDelegate {
     @IBOutlet var imgSub:UIImageView?
     @IBOutlet var btnSalir:UIButton?
-    @IBOutlet var txtNombre:NuevoTextField?
-    @IBOutlet var txtLocalizacion:NuevoTextField?
+    @IBOutlet var txtDescripcion:UITextView?
     @IBOutlet var txtProvincia:NuevoTextField?
     @IBOutlet var txtPoblacion:NuevoTextField?
     @IBOutlet var btnAñadirUbicacion:UIButton?
+     @IBOutlet var btnGaleria:UIButton?
+     @IBOutlet var btnCamara:UIButton?
+    @IBOutlet var vistaRedonda:UIView?
+    @IBOutlet var lblError:UILabel?
     
 
     var downloadURL = ""
@@ -32,17 +35,22 @@ class VCSelectImg: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //comprobamos si se ha añadido alguna ubicacion, y si es asi cambiamos el texto del boton.
         if(DataHolder.sharedInstance.miPerfil.sLongitud != nil && (DataHolder.sharedInstance.miPerfil.sLatitud != nil) ){
-            self.btnAñadirUbicacion?.setTitle("Modificar Ubicacion", for: .normal) //"Modificar Ubicacion")
+            self.btnAñadirUbicacion?.setTitle("Modificar Ubicacion", for: .normal)
         }
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         alert1.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        btnAñadirUbicacion?.layer.cornerRadius = 15
+        btnGaleria?.layer.cornerRadius = 15
+        btnCamara?.layer.cornerRadius = 15
+        txtDescripcion?.layer.cornerRadius = 15
         imagePicker.delegate = self
-        btnSalir?.layer.cornerRadius = 15
         self.imgSub?.layer.cornerRadius = (self.imgSub?.frame.size.width)! / 2
         self.imgSub?.clipsToBounds = true
         self.imgSub?.layer.borderWidth = 1.0
         self.imgSub?.layer.borderColor = UIColor.white.cgColor
+         self.vistaRedonda?.layer.cornerRadius = 15
         
         
     }
@@ -52,22 +60,26 @@ class VCSelectImg: UIViewController, UIImagePickerControllerDelegate, UINavigati
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    // el boton que abre la galeria para seleccionar una foto
     @IBAction func accionBotonGaleria()
     {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         self.present(imagePicker, animated: true, completion: nil)
     }
+ // el boton que abre la camara para subir una foto.
     @IBAction func accionBotonCamara()
     {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
         self.present(imagePicker, animated: true, completion: nil)
     }
-
+    //creamos un perfil
     @IBAction func accionBotonConfirmar()
     {
-        if imgData != nil {
+        // comprobamos que esten rellenos todos los datos que no haya nulls
+        if imgData != nil && !(DataHolder.sharedInstance.miPerfil.sLongitud != nil && (self.txtDescripcion?.text?.isEmpty)! && (self.txtPoblacion?.text?.isEmpty)! && (self.txtProvincia?.text?.isEmpty)!) {
+            // creamos un codigo para el nombre de la imagen y asi  asegurar que no se repita ninguna.
             let tiempoMilis:Int = Int((Date().timeIntervalSince1970 * 1000.0).rounded())
             let ruta:String = String(format: "imagenes/imagen%d.jpg", tiempoMilis)
             let imagenRef = DataHolder.sharedInstance.firStorageRef?.child(ruta)
@@ -77,35 +89,29 @@ class VCSelectImg: UIViewController, UIImagePickerControllerDelegate, UINavigati
             let uploadTask = imagenRef?.putData(imgData!, metadata: metadata) { (metadata, error) in
                 guard let metadata = metadata
         else {
-            return
+            
+                return
              }
+                //convertimos la url a string
                 let downloadURL = metadata.downloadURL()
-                self.downloadURL = (downloadURL?.absoluteString)!//.path!
-                DataHolder.sharedInstance.savePerfil()
-                print("----->"+self.downloadURL)
-                DataHolder.sharedInstance.miPerfil.sNombre=self.txtNombre?.text
-                DataHolder.sharedInstance.miPerfil.sLocalizacion=self.txtLocalizacion?.text
+                self.downloadURL = (downloadURL?.absoluteString)!
+              
+             //  pasamos todos los datos a mi perfil.
+                DataHolder.sharedInstance.miPerfil.sDescripcion=self.txtDescripcion?.text
                 DataHolder.sharedInstance.miPerfil.sProvincia=self.txtProvincia?.text
                 DataHolder.sharedInstance.miPerfil.sPoblacion=self.txtPoblacion?.text
                 DataHolder.sharedInstance.miPerfil.sImagen = self.downloadURL
-                print("----IMAGEN-->",self.downloadURL)
                 DataHolder.sharedInstance.savePerfil()
+                self.performSegue(withIdentifier: "tregistro", sender: self)
                 self.present(self.alert1, animated: true)
                 
             }
         
         }
     }
-    
-    @IBAction func accionBotonSubir()
-    {
-        
-        }
-    
-
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+        // convertimos la imagen a jpg
         imgData = UIImageJPEGRepresentation(img!, 1)!
         imgSub?.image = img
         self.dismiss(animated: true, completion: nil)
@@ -114,15 +120,7 @@ class VCSelectImg: UIViewController, UIImagePickerControllerDelegate, UINavigati
         self.dismiss(animated: true, completion: nil)
 
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 
 }
 

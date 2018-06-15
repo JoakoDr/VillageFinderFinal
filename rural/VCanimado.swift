@@ -25,7 +25,7 @@ class VCanimado: UIViewController,UIScrollViewDelegate {
         scrollView?.delegate = self
         for image in 0...2
         {
-           let imageT = UIImage(named: "\(image).png")
+            let imageT = UIImage(named: "\(image).png")
             let imageView = UIImageView(image: imageT)
             let xCoordinate = view.frame.midX + view.frame.width * CGFloat(image)
             contentWidth += view.frame.width
@@ -44,7 +44,6 @@ class VCanimado: UIViewController,UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func accionBotonMenu(){
-        print("!!!!!!!!!!!!!")
         UIView.animate(withDuration: 0.5, delay: 0.1, options:
             UIViewAnimationOptions.curveEaseInOut, animations:{ () -> Void in
                 self.vistaMenu?.frame = self.FrmAnimacionMenuAppear!
@@ -59,15 +58,5 @@ class VCanimado: UIViewController,UIScrollViewDelegate {
         }, completion: {(finished) -> Void in })
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

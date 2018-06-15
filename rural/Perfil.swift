@@ -7,12 +7,12 @@
 //
 
 import UIKit
-// esta clase presenta el perfil del usuario actual descargandolo de la base de datos
+// esta clase representa el perfil del usuario actual descargandolo de la base de datos
 class Perfil: NSObject {
     
     //hay que poner todos los datos del registro
     var sNombre:String?
-    var sLocalizacion:String?
+    var sDescripcion:String?
     var sPoblacion:String?
     var sProvincia:String?
     var sImagen:String?
@@ -25,7 +25,7 @@ class Perfil: NSObject {
     func setMap(valores:[String:Any]){
         sNombre = valores["Nombre"] as? String
          sEmail = valores["e-mail"] as? String
-        sLocalizacion = valores["Localizacion"] as? String
+        sDescripcion = valores["Descripcion"] as? String
         sPoblacion = valores["Poblacion"] as? String
         sProvincia = valores["Provincia"] as? String
         sImagen = valores["Imagen"] as? String
@@ -37,7 +37,7 @@ class Perfil: NSObject {
         
         return [
             "Nombre": sNombre as Any,
-            "Localizacion": sLocalizacion as Any,
+            "sDescripcion": sDescripcion as Any,
             "Poblacion": sPoblacion as Any,
             "Provincia": sProvincia as Any,
             "Imagen": sImagen as Any,
@@ -46,17 +46,6 @@ class Perfil: NSObject {
             "e-mail": sEmail as Any
         ]
     }
-   
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+

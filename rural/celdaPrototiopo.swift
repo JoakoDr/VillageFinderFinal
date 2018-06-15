@@ -24,8 +24,10 @@ class celdaPrototiopo: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
+    // preguntamos al hashmap de imagenes si se ha descargado la imagen para obtenerla de ahi, y sino la bajamos de firebase.
     func mostrarImagen(url:String) {
         let imgdes = DataHolder.sharedInstance.hmImagenes[url]
+        // si la imagen no esta en el dataholder nos la descargamos de firebase.
         if(imgdes == nil){
             self.imagen?.image = nil
             let gsReference = DataHolder.sharedInstance.firStorage?.reference(forURL: url)

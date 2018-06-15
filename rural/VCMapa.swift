@@ -18,15 +18,17 @@ class VCMapa: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,Dat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //creamos el objeto
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
         locationManager?.startUpdatingLocation()
         mapa?.showsUserLocation = true
+        //llamamos al metodo descargarColeccion para descargarnos los datos del pueblo
         DataHolder.sharedInstance.descargarColeccion(delegate: self)
     }
-
-    func agregarPin(latitude lat:Double, longitude lon:Double/*coordenada:CLLocationCoordinate2D*/, titulo tpin:String)
+    //añadimos la longitud y la latitud del pueblo por parametro.
+    func agregarPin(latitude lat:Double, longitude lon:Double, titulo tpin:String)
     {
         let annotation:MKPointAnnotation = MKPointAnnotation()
         annotation.coordinate.latitude = lat
@@ -38,7 +40,7 @@ class VCMapa: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,Dat
         super.didReceiveMemoryWarning()
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    
+        //el booleano siempre que entras es falso para que establezca en tu localización.
         if(booleano == false){
             let miSpan:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             let tempRegion:MKCoordinateRegion = MKCoordinateRegion(center: locations[0].coordinate, span: miSpan)
@@ -47,6 +49,7 @@ class VCMapa: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,Dat
         }
         
     }
+    //agregamos un pin en cada pueblo haciendo uso del protocolo dhd
     func DHDdescargaCiudades(blFin: Bool) {
         
         if(blFin)
